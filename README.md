@@ -1,4 +1,4 @@
-# Subtitle word lines
+# Subtitle lines
 The first scripts creates a combined file with all subtitles from the provided folder with subtitles. 
 The second script looks up an entered word in the combined file and fetches exact lines with the word  
 
