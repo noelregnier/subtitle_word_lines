@@ -1,5 +1,6 @@
 # Subtitle word lines
-The first scripts creates a file with all subtitles. The second scrip looks up an entered word and fetches lines with the word  
+The first scripts creates a combined file with all subtitles from the provided folder with subtitles. 
+The second script looks up an entered word in the combined file and fetches exact lines with the word  
 
 ## Usage
 python create_combined_file.py --path path_to_the_folder_with_subtitles
