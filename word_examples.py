@@ -1,5 +1,4 @@
 import re
-import argparse
 
 #how many times each word happens in the the TV series
 
