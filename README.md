@@ -5,7 +5,7 @@
 ## Usage
 $ python create_combined_file.py --path /path/to/folder_with_subtitles
 
-$ python word_examples.py --word word_to_look_up
+$ python word_examples.py 
 
 ###
 Sample subtitles can be downloaded here http://www.tvsubtitles.net/tvshow-923-1.html

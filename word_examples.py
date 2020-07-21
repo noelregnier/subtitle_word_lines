@@ -1,11 +1,6 @@
 import re
 import argparse
 
-#take a word for seach from a user
-parser = argparse.ArgumentParser()
-parser.add_argument("--word", help="Enter a word you want to look up in the combined file", required=True)
-args = parser.parse_args()
-
 #how many times each word happens in the the TV series
 
 all_lines = []   #list with text lines from subtitles
@@ -42,57 +37,60 @@ for word in words:
 
 # Result2 - how many times a word happens in the subtitles and exact lines with it
 # check if the word entered by a user is among lines
-guess_input = args.word
-guess = guess_input.lower()
-if guess not in counts:
-    print("The word is not found.")
-    quit()
-print("For '{}' we have these results: {}".format(guess_input, counts[guess]))
+while True:
+    guess_input = input("Please enter a word or 'quit' to exit ")
+    guess = guess_input.lower()
+    if guess == "quit": quit()
+    if guess not in counts:
+        print("The word is not found.")
+        continue
+
+    # print("For '{}' we have these results: {}".format(guess_input, counts[guess]))
 
 
-#print all lines with the desired word guess
-index = []
-for i, line in enumerate(all_lines):
-    line = line.lower()
-    strict = re.findall('^'+guess+'[^a-z]', line)
-    if len(strict) == 0:
-        strict = re.findall('[^a-z]' + guess + '[^a-z]', line)
-    if len(strict) > 0:
-        index.append(i)
+    #print all lines with the desired word guess
+    index = []
+    for i, line in enumerate(all_lines):
+        line = line.lower()
+        strict = re.findall('^'+guess+'[^a-z]', line)
+        if len(strict) == 0:
+            strict = re.findall('[^a-z]' + guess + '[^a-z]', line)
+        if len(strict) > 0:
+            index.append(i)
 
 
-#print found lines
-print("The results are:"+"\n")
-number = 0
+    #print found lines
+    print("The results are:"+"\n")
+    number = 0
 
-for i in index:
-    number = number+1
-    sentence = []
-    k = i
-    ss = True
-    while ss:
-        line = all_lines[k]
-        sentence.append(line)
-        line = line.strip()
-        k = k+1
-        if (line.endswith(".") or line.endswith("!") or line.endswith("?") or line.endswith("?!")):
-            ss = False
-    k = i
-    while True:
-        k = k - 1
-        line = all_lines[k]
-        line1 = line.strip()
-        if (line1.endswith(".") or line1.endswith("!") or line1.endswith("?") or line1.endswith("?!")):
-            break
-        sentence.insert(0, line)
+    for i in index:
+        number = number+1
+        sentence = []
+        k = i
+        ss = True
+        while ss:
+            line = all_lines[k]
+            sentence.append(line)
+            line = line.strip()
+            k = k+1
+            if (line.endswith(".") or line.endswith("!") or line.endswith("?") or line.endswith("?!")):
+                ss = False
+        k = i
+        while True:
+            k = k - 1
+            line = all_lines[k]
+            line1 = line.strip()
+            if (line1.endswith(".") or line1.endswith("!") or line1.endswith("?") or line1.endswith("?!")):
+                break
+            sentence.insert(0, line)
 
-    sen = ""
+        sen = ""
 
-    for m in sentence:
-        sen = sen + m
-    print("Result {}:".format(number))
-    print(sen)
-    print("----------------------------")
+        for m in sentence:
+            sen = sen + m
+        print("Result {}:".format(number))
+        print(sen)
+        print("----------------------------")
 
 
 
